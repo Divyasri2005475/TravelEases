@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Welcome, {{ user.username }}!</h2>
+    <p>Travel Booking Dashboard</p>
+    <div class="row mt-4">
+        <div class="col-md-3 mb-3">
+            <div class="card dashboard-card">
+                <div class="card-body">
+
+                    <h5>Total Bookings</h5>
+
+                    <h2>{{ total }}</h2>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-3 mb-3">
+
+            <div class="card dashboard-card">
+                <div class="card-body">
+                    <h5>Upcoming Trips</h5>
+                    <h2>{{ upcoming }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+
+            <div class="card dashboard-card">
+                <div class="card-body">
+                    <h5>Completed Trips</h5>
+                    <h2>{{ completed }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card dashboard-card">
+                <div class="card-body">
+                    <h5>Cancelled Trips</h5>
+                    <h2>{{ cancelled }}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="{% url 'add_booking' %}"
+       class="btn btn-primary mt-3">
+        + Add New Booking
+    </a>
+
+    <a href="{% url 'view_bookings' %}"
+       class="btn btn-dark mt-3">
+        View All Bookings
+    </a>
+
+    <h4 class="mt-5">Recent Bookings</h4>
+
+    <table class="table table-bordered mt-3">
+
+        <thead class="table-dark">
+
+            <tr>
+                <th>Destination</th>
+                <th>Travel Date</th>
+                <th>Travellers</th>
+                <th>Status</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for booking in recent_bookings %}
+
+            <tr>
+
+                <td>{{ booking.destination }}</td>
+
+                <td>{{ booking.travel_date }}</td>
+
+                <td>{{ booking.travellers }}</td>
+
+                <td>{{ booking.status }}</td>
+
+            </tr>
+
+            {% empty %}
+
+            <tr>
+                <td colspan="4">No bookings available.</td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

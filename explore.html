@@ -1,0 +1,217 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Explore Destinations | TravelEase{% endblock %}
+
+{% block content %}
+
+<section class="explore-page">
+
+  
+    <div class="explore-hero">
+        <div class="explore-hero-content">
+
+            <span>EXPLORE THE WORLD WITH TRAVELEASE</span>
+
+            <h1>
+                Discover Your Next
+                <br>
+                Beautiful Destination
+            </h1>
+
+            <p>
+                Find amazing places, plan your journey and
+                create unforgettable memories.
+            </p>
+
+            <a href="#destination-list" class="explore-hero-btn">
+                Explore Places
+                <i class="bi bi-arrow-down"></i>
+            </a>
+
+        </div>
+    </div>
+
+    
+    <div class="container explore-container">
+
+        
+        <div class="explore-title" id="destination-list">
+
+            <span>YOUR NEXT ADVENTURE</span>
+
+            <h2>Popular Destinations</h2>
+
+            <p>
+                Choose your favourite destination and
+                start planning your trip.
+            </p>
+
+        </div>
+
+        
+        <form method="GET" class="destination-filter">
+
+            <div class="filter-search">
+                <i class="bi bi-search"></i>
+
+                <input
+                    type="text"
+                    name="search"
+                    placeholder="Search destination or country..."
+                    value="{{ search|default:'' }}"
+                >
+            </div>
+
+            
+            <select name="category">
+
+                <option value="">All Categories</option>
+
+                {% for value, label in categories %}
+
+                    <option value="{{ value }}"
+                        {% if selected_category == value %}selected{% endif %}>
+                        {{ label }}
+                    </option>
+
+                {% endfor %}
+
+            </select>
+
+            
+            <input
+                type="number"
+                name="max_budget"
+                placeholder="Maximum budget (₹)"
+                min="0"
+                step="1000"
+                value="{{ max_budget|default:'' }}"
+            >
+
+           
+            <button type="submit">
+                <i class="bi bi-funnel"></i>
+                Apply Filters
+            </button>
+
+            
+            <a href="{% url 'explore_destinations' %}" class="filter-reset">
+                Reset
+            </a>
+
+        </form>
+        <div class="destination-results">
+
+            <h3>Explore Places</h3>
+
+            <span>
+                {{ destinations|length }} destinations found
+            </span>
+
+        </div>
+
+        
+        <div class="destination-grid">
+
+            {% for destination in destinations %}
+
+                <div class="destination-card">
+
+                    
+                    <div class="destination-image">
+
+                        <img
+                            src="{{ destination.image_url }}"
+                            alt="{{ destination.name }}"
+                            class="destination-photo"
+                            loading="lazy"
+                            onerror="this.onerror=null; this.src='https://placehold.co/600x400?text=Image+Not+Available';"
+                        >
+
+                    </div>
+
+                    
+                    <div class="destination-content">
+
+                        <div class="destination-location">
+
+                            <i class="bi bi-geo-alt-fill"></i>
+
+                            {{ destination.country }}
+
+                            <span>
+                                {{ destination.category }}
+                            </span>
+
+                        </div>
+
+                        <h3>{{ destination.name }}</h3>
+
+                        <p>
+                            {{ destination.description|truncatewords:18 }}
+                        </p>
+
+                        
+                        <div class="destination-info">
+
+                            <div>
+                                <small>Estimated budget</small>
+
+                                <strong>
+                                    ₹{{ destination.estimated_budget|floatformat:0 }}
+                                </strong>
+                            </div>
+
+                            <div>
+                                <small>Duration</small>
+
+                                <strong>
+                                    {{ destination.duration_days }} Days
+                                </strong>
+                            </div>
+
+                        </div>
+
+                        
+                        <a
+                            href="{% url 'destination_detail' destination.pk %}"
+                            class="destination-view-btn"
+                        >
+                            View Details
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            {% empty %}
+
+              
+                <div class="destination-empty">
+
+                    <i class="bi bi-search"></i>
+
+                    <h3>No destinations found</h3>
+
+                    <p>
+                        Try changing your search or filter options.
+                    </p>
+
+                    <a href="{% url 'explore_destinations' %}">
+                        View All Destinations
+                    </a>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

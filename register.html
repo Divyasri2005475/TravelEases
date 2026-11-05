@@ -1,0 +1,173 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Create Account | TravelEase{% endblock %}
+
+{% block content %}
+
+<section class="auth-section">
+
+    <div class="auth-image-panel">
+
+        <div class="auth-image-overlay"></div>
+
+        <div class="auth-image-content">
+
+            <a href="{% url 'home' %}" class="auth-logo">
+                <i class="bi bi-airplane-engines-fill"></i>
+                TravelEase
+            </a>
+
+            <div class="auth-message">
+
+                <span>START YOUR JOURNEY</span>
+
+                <h1>
+                    The world is
+                    <br>
+                    yours to <span>explore.</span>
+                </h1>
+
+                <p>
+                    Discover extraordinary places,
+                    meet new cultures and create
+                    beautiful memories.
+                </p>
+
+                <div class="auth-travel-note">
+
+                    <i class="bi bi-globe-asia-australia"></i>
+
+                    <div>
+                        <strong>Your next adventure awaits</strong>
+                        <p>Explore. Discover. Experience.</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="auth-form-panel">
+
+        <div class="auth-form-card">
+
+            <div class="auth-mobile-logo">
+                <i class="bi bi-airplane-engines-fill"></i>
+                TravelEase
+            </div>
+
+            <div class="auth-heading">
+
+                <span>CREATE YOUR ACCOUNT</span>
+
+                <h2>Join TravelEase</h2>
+
+                <p>
+                    Sign up and start planning your next trip.
+                </p>
+
+            </div>
+
+            {% if form.errors %}
+
+            <div class="alert alert-danger">
+                Please correct the errors below.
+                {{ form.errors }}
+            </div>
+
+            {% endif %}
+
+            <form method="POST" id="registerForm">
+
+                {% csrf_token %}
+
+                {% for field in form %}
+
+                    <div class="auth-input-group">
+
+                        <label for="{{ field.id_for_label }}">
+                            {% if field.name == 'username' %}
+                                Username
+                            {% elif field.name == 'password1' %}
+                                Password
+                            {% elif field.name == 'password2' %}
+                                Confirm Password
+                            {% else %}
+                                {{ field.label }}
+                            {% endif %}
+                        </label>
+
+                        <div class="input-icon-wrapper">
+
+                            {% if field.name == 'username' %}
+                                <i class="bi bi-person"></i>
+                            {% else %}
+                                <i class="bi bi-lock"></i>
+                            {% endif %}
+
+                            {{ field }}
+
+                            {% if field.name == 'password1' or field.name == 'password2' %}
+
+                            <button type="button"
+                                    class="password-toggle"
+                                    data-target="{{ field.id_for_label }}">
+
+                                <i class="bi bi-eye"></i>
+
+                            </button>
+
+                            {% endif %}
+
+                        </div>
+
+                        {% if field.help_text %}
+                            <div class="field-help">
+                                {{ field.help_text|safe }}
+                            </div>
+                        {% endif %}
+
+                        {% for error in field.errors %}
+                            <small class="text-danger">
+                                {{ error }}
+                            </small>
+                        {% endfor %}
+
+                    </div>
+
+                {% endfor %}
+
+                <button type="submit"
+                        class="auth-submit-btn">
+
+                    Create Account
+
+                    <i class="bi bi-arrow-right"></i>
+
+                </button>
+
+            </form>
+
+            <div class="auth-divider">
+                <span>ALREADY HAVE AN ACCOUNT?</span>
+            </div>
+
+            <a href="{% url 'login' %}"
+               class="auth-switch-btn">
+                Login to Your Account
+            </a>
+
+            <p class="auth-terms">
+                By creating an account, you agree to our
+                Terms and Privacy Policy.
+            </p>
+
+        </div>
+    </div>
+</section>
+{% endblock %}

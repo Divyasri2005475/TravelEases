@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ destination.name }} | TravelEase{% endblock %}
+
+{% block content %}
+
+<section class="destination-detail-page">
+
+    <div class="destination-detail-container">
+
+        <div class="destination-detail-image">
+            <img src="{{ destination.image_url }}" alt="{{ destination.name }}"
+                onerror="this.onerror=null; this.src='https://placehold.co/1200x700?text=Image+Not+Available';">
+            <div class="detail-image-overlay">
+                <span>{{ destination.country }}</span>
+                <h1>{{ destination.name }}</h1>
+            </div>
+        </div>
+
+        <div class="destination-detail-content">
+
+            <div class="detail-category">
+                <i class="bi bi-geo-alt-fill"></i>
+                {{ destination.category }} Destination
+            </div>
+
+            <h2>About This Destination</h2>
+
+            <p>{{ destination.description }}</p>
+
+            <div class="detail-information">
+
+                <div>
+                    <i class="bi bi-currency-rupee"></i>
+                    <span>Estimated Budget</span>
+                    <strong>₹{{ destination.estimated_budget|floatformat:0 }}</strong>
+                </div>
+
+                <div>
+                    <i class="bi bi-calendar-week"></i>
+                    <span>Trip Duration</span>
+                    <strong>{{ destination.duration_days }} Days</strong>
+                </div>
+
+                <div>
+                    <i class="bi bi-globe"></i>
+                    <span>Country</span>
+                    <strong>{{ destination.country }}</strong>
+                </div>
+
+            </div>
+
+            <div class="detail-actions">
+
+                <a href="{% url 'add_booking' %}?destination={{ destination.name|urlencode }}" class="detail-book-btn">
+                    <i class="bi bi-airplane-fill"></i>
+                    Book This Destination
+                </a>
+
+                <a href="{% url 'explore_destinations' %}" class="detail-back-btn">
+                    <i class="bi bi-arrow-left"></i>
+                    Back to Explore
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

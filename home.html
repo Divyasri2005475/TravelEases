@@ -1,0 +1,362 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}TravelEase | Explore The World{% endblock %}
+
+{% block content %}
+<section class="hero-section">
+
+    <div class="hero-overlay"></div>
+
+    <div class="container hero-content">
+
+        <span class="hero-tag">
+            <i class="bi bi-globe-americas"></i>
+            YOUR JOURNEY STARTS HERE
+        </span>
+
+        <h1>
+            Discover Your Next
+            <span>Adventure</span>
+        </h1>
+
+        <p>
+            Explore beautiful destinations, experience new cultures
+            and create memories that last forever.
+        </p>
+
+        <a href="#destinations" class="btn hero-btn">
+            Explore Destinations
+            <i class="bi bi-arrow-right"></i>
+        </a>
+
+    </div>
+    <div class="container search-container">
+
+        <form action="{% url 'add_booking' %}"
+              method="GET"
+              class="travel-search">
+
+            <div class="search-field">
+
+                <i class="bi bi-geo-alt"></i>
+
+                <div>
+                    <label>Destination</label>
+
+                    <input type="text"
+                           name="destination"
+                           placeholder="Where do you want to go?"
+                           required>
+                </div>
+
+            </div>
+
+            <div class="search-field">
+
+                <i class="bi bi-calendar-event"></i>
+
+                <div>
+                    <label>Travel Date</label>
+
+                    <input type="date"
+                           name="travel_date"
+                           id="homeTravelDate"
+                           required>
+                </div>
+
+            </div>
+
+            <div class="search-field">
+
+                <i class="bi bi-people"></i>
+
+                <div>
+                    <label>Travellers</label>
+
+                    <input type="number"
+                           name="travellers"
+                           min="1"
+                           value="1"
+                           required>
+                </div>
+
+            </div>
+
+            <button type="submit" class="search-btn">
+                <i class="bi bi-search"></i>
+                Find Trip
+            </button>
+
+        </form>
+    </div>
+</section>
+<section class="destination-section" id="destinations">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span>EXPLORE THE WORLD</span>
+
+            <h2>Popular Destinations</h2>
+
+            <p>
+                Discover some of the most beautiful places
+                around the world.
+            </p>
+
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+
+                <div class="destination-card">
+
+                    <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=700"
+                         alt="Bali">
+
+                    <div class="destination-info">
+
+                        <span>
+                            <i class="bi bi-geo-alt-fill"></i>
+                            Indonesia
+                        </span>
+
+                        <h4>Bali</h4>
+
+                        <p>Beautiful beaches and tropical escapes.</p>
+
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'add_booking' %}">
+                            Book Trip <i class="bi bi-arrow-right"></i>
+                        </a>
+                        {% else %}
+                        <a href="{% url 'register' %}">
+                            Book Trip <i class="bi bi-arrow-right"></i>
+                        </a>
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-md-6 col-lg-3">
+
+                <div class="destination-card">
+
+                    <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=700"
+                         alt="Paris">
+
+                    <div class="destination-info">
+
+                        <span>
+                            <i class="bi bi-geo-alt-fill"></i>
+                            France
+                        </span>
+
+                        <h4>Paris</h4>
+
+                        <p>Romantic streets and iconic landmarks.</p>
+
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'add_booking' %}">
+                            Book Trip <i class="bi bi-arrow-right"></i>
+                        </a>
+                        {% else %}
+                        <a href="{% url 'register' %}">
+                            Book Trip <i class="bi bi-arrow-right"></i>
+                        </a>
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-md-6 col-lg-3">
+
+                <div class="destination-card">
+
+                    <img src="https://images.unsplash.com/photo-1528181304800-259b08848526?w=700"
+                         alt="Thailand">
+
+                    <div class="destination-info">
+
+                        <span>
+                            <i class="bi bi-geo-alt-fill"></i>
+                            Thailand
+                        </span>
+
+                        <h4>Thailand</h4>
+
+                        <p>Adventure, islands and amazing culture.</p>
+
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'add_booking' %}">
+                            Book Trip <i class="bi bi-arrow-right"></i>
+                        </a>
+                        {% else %}
+                        <a href="{% url 'register' %}">
+                            Book Trip <i class="bi bi-arrow-right"></i>
+                        </a>
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-md-6 col-lg-3">
+
+                <div class="destination-card">
+
+                    <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=700"
+                         alt="Maldives">
+
+                    <div class="destination-info">
+
+                        <span>
+                            <i class="bi bi-geo-alt-fill"></i>
+                            Maldives
+                        </span>
+
+                        <h4>Maldives</h4>
+
+                        <p>Luxury stays and crystal-clear waters.</p>
+
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'add_booking' %}">
+                            Book Trip <i class="bi bi-arrow-right"></i>
+                        </a>
+                        {% else %}
+                        <a href="{% url 'register' %}">
+                            Book Trip <i class="bi bi-arrow-right"></i>
+                        </a>
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- WHY CHOOSE US -->
+
+<section class="features-section">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span>WHY TRAVELEASE</span>
+
+            <h2>Travel Made Simple</h2>
+
+            <p>
+                Everything you need for a smooth travel experience.
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+
+                <div class="feature-card">
+
+                    <i class="bi bi-globe2"></i>
+
+                    <h4>Beautiful Destinations</h4>
+
+                    <p>
+                        Explore amazing destinations
+                        and plan your next adventure.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="feature-card">
+
+                    <i class="bi bi-shield-check"></i>
+
+                    <h4>Easy Booking</h4>
+
+                    <p>
+                        Manage your travel bookings
+                        through a simple online platform.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="feature-card">
+
+                    <i class="bi bi-headset"></i>
+
+                    <h4>Simple Management</h4>
+
+                    <p>
+                        View, update and manage your
+                        bookings whenever you need.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<section class="offer-section">
+
+    <div class="container">
+
+        <div class="offer-content">
+
+            <span>MAKE YOUR NEXT TRIP SPECIAL</span>
+
+            <h2>The World Is Waiting For You</h2>
+
+            <p>
+                Start planning your next unforgettable journey today.
+            </p>
+
+            {% if user.is_authenticated %}
+
+            <a href="{% url 'add_booking' %}"
+               class="btn offer-btn">
+                Book Your Journey
+            </a>
+
+            {% else %}
+
+            <a href="{% url 'register' %}"
+               class="btn offer-btn">
+                Join TravelEase
+            </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,111 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Add Booking | TravelEase{% endblock %}
+
+{% block content %}
+
+<section class="booking-page">
+
+    <div class="booking-container">
+
+        
+        <div class="booking-image">
+            <div class="booking-image-overlay">
+                <span>DISCOVER THE WORLD</span>
+                <h1>Your Journey<br>Begins Here.</h1>
+                <p>Explore beautiful destinations and create unforgettable memories with TravelEase.</p>
+
+                <div class="booking-image-features">
+                    <div><i class="bi bi-globe-asia-australia"></i> Explore Places</div>
+                    <div><i class="bi bi-airplane"></i> Easy Booking</div>
+                    <div><i class="bi bi-heart"></i> Beautiful Memories</div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="booking-form-section">
+
+            <div class="booking-heading">
+                <span>PLAN YOUR NEXT ADVENTURE</span>
+                <h2>Add New Booking</h2>
+                <p>Enter your travel details below.</p>
+            </div>
+
+            <form method="POST" id="bookingForm">
+
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <div class="booking-fields">
+
+                    <div class="booking-field">
+                        <label for="{{ form.customer_name.id_for_label }}">
+                            <i class="bi bi-person"></i> Customer Name
+                        </label>
+                        {{ form.customer_name }}
+                        {{ form.customer_name.errors }}
+                    </div>
+
+                    <div class="booking-field">
+                        <label for="{{ form.destination.id_for_label }}">
+                            <i class="bi bi-geo-alt"></i> Destination
+                        </label>
+                        {{ form.destination }}
+                        {{ form.destination.errors }}
+                    </div>
+
+                    <div class="booking-field">
+                        <label for="{{ form.travel_date.id_for_label }}">
+                            <i class="bi bi-calendar-event"></i> Travel Date
+                        </label>
+                        {{ form.travel_date }}
+                        {{ form.travel_date.errors }}
+                    </div>
+
+                    <div class="booking-field">
+                        <label for="{{ form.travellers.id_for_label }}">
+                            <i class="bi bi-people"></i> Travellers
+                        </label>
+                        {{ form.travellers }}
+                        {{ form.travellers.errors }}
+                    </div>
+
+                    <div class="booking-field">
+                        <label for="{{ form.budget.id_for_label }}">
+                            <i class="bi bi-currency-rupee"></i> Budget
+                        </label>
+                        {{ form.budget }}
+                        {{ form.budget.errors }}
+                    </div>
+
+                    <div class="booking-field">
+                        <label for="{{ form.status.id_for_label }}">
+                            <i class="bi bi-check-circle"></i> Booking Status
+                        </label>
+                        {{ form.status }}
+                        {{ form.status.errors }}
+                    </div>
+
+                </div>
+
+                <button type="submit" class="booking-submit">
+                    <i class="bi bi-airplane-fill"></i>
+                    Save Booking
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

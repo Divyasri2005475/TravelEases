@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>My Travel Bookings</h2>
+    <form method="GET" class="row mt-3 mb-4">
+        <div class="col-md-5">
+            <input type="text"name="search"class="form-control" placeholder="Search destination..."value="{{ search }}">
+        </div>
+        <div class="col-md-4">
+            <select name="status"
+                    class="form-select">
+
+                <option value="">All Status</option>
+
+                <option value="Pending"
+                    {% if selected_status == 'Pending' %}selected{% endif %}>
+                    Pending
+                </option>
+
+                <option value="Confirmed"
+                    {% if selected_status == 'Confirmed' %}selected{% endif %}>
+                    Confirmed
+                </option>
+
+                <option value="Completed"
+                    {% if selected_status == 'Completed' %}selected{% endif %}>
+                    Completed
+                </option>
+
+                <option value="Cancelled"
+                    {% if selected_status == 'Cancelled' %}selected{% endif %}>
+                    Cancelled
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="col-md-3">
+            <button class="btn btn-primary">
+                Search / Filter
+            </button>
+
+        </div>
+    </form>
+    <a href="{% url 'add_booking' %}"class="btn btn-success mb-3">
+        Add Booking
+    </a>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Customer</th>
+                    <th>Destination</th>
+                    <th>Travel Date</th>
+                    <th>Travellers</th>
+                    <th>Budget</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for booking in bookings %}
+
+                <tr>
+
+                    <td>{{ booking.id }}</td>
+
+                    <td>{{ booking.customer_name }}</td>
+
+                    <td>{{ booking.destination }}</td>
+
+                    <td>{{ booking.travel_date }}</td>
+
+                    <td>{{ booking.travellers }}</td>
+
+                    <td>{{ booking.budget }}</td>
+
+                    <td>{{ booking.status }}</td>
+
+                    <td>
+
+                        <a href="{% url 'edit_booking' booking.id %}"
+                           class="btn btn-warning btn-sm">
+                            Edit
+                        </a>
+
+                        <a href="{% url 'delete_booking' booking.id %}"
+                           class="btn btn-danger btn-sm">
+                            Delete
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+                    <td colspan="8" class="text-center">
+                        No bookings found.
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
+{% endblock %}
